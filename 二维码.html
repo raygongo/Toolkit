@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="./jquery-1.10.2.js"></script>
+        <!--<script type='text/javascript' src='http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js'></script>-->
+<script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+
+    </head>
+        <body>
+    <div id="qrcode"></div>
+    <script>
+        window.onload=function(){
+            $('#qrcode').qrcode("http://blog.wpjam.com");
+        }
+    </script>
+    </body>
+</html>

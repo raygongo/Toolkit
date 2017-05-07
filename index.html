@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="./normalize.css" rel="stylesheet" type="text/css">
+    <!--<script src="./jquery-1.10.2.js"></script>-->
+    <link rel="stylesheet" href="./swiper.css">
+    <script src="./zepto.js"></script>
+    <script src="./touch.js"></script>
+    <script src="./velocity.min.js"></script>
+    <script src="./swiper.min.js"></script>
+    
+    <!--<script src="./vue.js"></script>-->
+    <style>
+        .content {
+            position: relative;
+        }
+        
+        .nav {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav li {
+            float: left;
+            height: 30px;
+            width: 50px;
+            line-height: 30px;
+            text-align: center;
+            vertical-align: middle;
+            color: white;
+            background: #000;
+            cursor: pointer;
+        }
+        
+        .nav-bar {
+            position: absolute;
+            width: 50px;
+            height: 5px;
+            background: orangered;
+            bottom: 0;
+            left: 0;
+            transition: all 0.5s;
+        }
+        
+        .wrapper {
+            height: 300px;
+            background: blue;
+            position: relative;
+        }
+        
+        .center {
+            width: 400px;
+            text-align: center;
+            background: red;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%)
+        }
+        
+        .article li {
+            width: 300px;
+            height: 200px;
+            background: blue;
+            display: none;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="content">
+            <ul class="nav">
+                <li data-index="0">{{number}}</li>
+                <li data-index="1">2</li>
+                <li data-index="2">3</li>
+                <li data-index="3">4</li>
+            </ul>
+            <div class="nav-bar"></div>
+        </div>
+        <ul class="article">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">Slide 1</div>
+                <div class="swiper-slide">Slide 2</div>
+                <div class="swiper-slide">Slide 3</div>
+            </div>
+            <!-- 如果需要分页器 -->
+            <div class="swiper-pagination">
+                
+            </div>
+        </div>
+
+    <script>
+        // new Vue({
+        //     el: '#app',
+        //     data: {
+        //         number: 11111
+        //     }
+        // })
+        $(function() {
+
+            var mySwiper = new Swiper ('.swiper-container', {
+                direction: 'horizontal',
+                loop: true,
+                
+                // 如果需要分页器
+                pagination: '.swiper-pagination',
+            }) 
+
+            var statrX;
+            var touchEnd;
+            $('.nav li').on('click', function(event) {
+                    showArticle($(this).data('index'));
+                    $('.nav-bar').velocity({
+                        'left': $(this).position().left
+                    }, {
+                        duration: 20,
+                        queue: false
+                    })
+                })
+                // .on('mouseleave', function() {
+                //     $('.nav-bar').velocity({
+                //         'left': 0
+                //     }, {
+                //         duration: 20,
+                //         queue: false
+                //     })
+                // })
+
+            function showArticle(index) {
+                $('.article li').hide().eq(index).show();
+            }
+
+            $('.article li').on('touchstart', function(event) {
+
+                event.preventDefault();
+                statrX = event.touches[0].pageX;
+            }).on('touchmove', function(event) {
+                touchEnd = event.touches[0].pageX - statrX;
+                console.log(touchEnd);
+                $(this).css({
+                    left: touchEnd + 'px'
+                })
+            }).on('touchend', function() {
+                $(this).velocity({
+                    'left': 0
+                }, {
+                    duration: 100,
+                    queue: false
+                })
+            })
+        })
+    </script>
+
+
+</body>
+
+</html>

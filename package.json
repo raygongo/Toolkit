@@ -1,0 +1,16 @@
+{
+  "name": "mock-server",
+  "version": "0.0.1",
+  "description": "mock-server-slyx",
+  "scripts": {
+    "mock": "node ./mock-server/server.js 2618"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "mockjs": "^1.0.1-beta2",
+    "express": "^4.13.4"
+  },
+  "dependencies": {
+   
+  }
+}

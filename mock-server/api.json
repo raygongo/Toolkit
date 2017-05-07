@@ -1,0 +1,122 @@
+{
+  "Demo": [
+    {
+      "url": "/categorys",
+      "desc": "获取一些category",
+      "mock":true,
+      "res": {
+        "success":true,
+        "message": "Get categorys successfully.",
+        "data": [{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},
+          {"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},{"catergoryName":"@word(1,6)","categoryValue":"@integer()"},
+          {"catergoryName":"@word(1,6)","categoryValue":"@integer()"}]
+      }
+    },
+    {
+      "url": "/category_detail",
+      "desc": "分类详情",
+      "mock":true,
+      "delay": 1000,
+      "res": {
+        "success":true,
+        "code": "@pick([200, 200])",
+        "message": "There is a 50% chance of failure, pls try again",
+        "data": {
+          "accessNum" : "@pick([10,20,30])",
+          "deviceAccessTotal":37,
+          "accessPercentage":"27%",
+          "openRate":{
+            "num":"@pick(['10%','20%','30%','90%'])",
+            "behavior":"@pick(['up','down'])",
+            "text_intro":"CT设备有效工作时长6小时/CT设备累计开机时间10小时=60%"
+          },
+          "useRate":{
+            "num":"@pick(['10%','20%','30%','90%'])",
+            "behavior":"@pick(['up','down'])",
+            "text_intro":"CT设备有效工作时长6小时/CT设备累计开机时间10小时=60%"
+
+          },
+          "errorRate":{
+            "num":"@pick(['10%','20%','30%','90%'])",
+            "behavior":"@pick(['up','down'])",
+            "text_intro":"CT设备有效工作时长6小时/CT设备累计开机时间10小时=60%"
+
+          }
+
+        }
+      }
+    },
+    {
+      "url": "/device_status",
+      "desc": "获取设备使用状态",
+      "delay": 1000,
+
+      "mock":true,
+      "res": {
+        "success":true,
+        "message": "Get data success",
+        "data": {
+          "fontIcon":"&#xe736",
+          "maxNormalFrequency":"95",
+          "devices|1-8":[{
+            "department":"@pick(['呼吸科','消化科','内科','外科','胸内科','骨科'])",
+            "deviceCount":"@integer(1,100)",
+            "deviceUseDetail|1-6":[{
+              "deviceName":"@pick(['GE Brivo','SONY','Panasonic','Siemens','Philips'])",
+              "useCount":"@integer(1,20)",
+              "status":"@pick(['busy','normal','offline'])",
+              "devId":"@integer(20,50)"
+            }]
+          }]
+        }
+      }
+    },
+    {
+      "url": "/usage_frequency",
+      "desc": "获取设备使用频次",
+      "delay": 1000,
+
+      "mock":true,
+      "res": {
+        "success":true,
+        "message": "Get data success",
+        "data": {
+          "usageToday":"@integer(100,1000)",
+          "usageTotal":"@integer(500,1000)",
+          "usageAverageCountry":"@integer(300,1000)",
+          "frequency|60-80":[{
+            "date":"@date('yyyy-MM-dd')",
+            "value":"@pick([0,50,10,0])"
+          }]
+        }
+      }
+    },
+    {
+      "url": "/top_usage",
+      "desc": "获取TOP3设备使用频次",
+      "delay": 1000,
+
+      "mock":true,
+      "res": {
+        "success":true,
+        "message": "Get data success",
+        "data|3": [{
+          "department":"CT(GE BRIVO) 脑外科",
+          "usage":"@integer(20,100)",
+          "averageType":"@pick(['local','country'])",
+          "averageUsage":"@integer(20,100)"
+        }]
+      }
+    },
+    {
+      "url": "/",
+      "desc": "Index",
+      "mock":true,
+      "res": {
+        "success":true,
+        "message": "Hi, this is mock server.",
+        "data": ""
+      }
+    }
+  ]
+}
