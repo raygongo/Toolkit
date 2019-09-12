@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 找质数
+      ;(function() {
+        // 找出100以内的质数
+        console.time(1)
+        for (let i = 2; i <= 1000000; i++) {
+          let flag = false
+          for (let a = 2; a <= Math.sqrt(i); a++) {
+            if (i % a == 0) {
+              // 不是质数
+              flag = true
+              break
+            }
+          }
+          if (!flag) {
+            // console.log(`${i}是质数`)
+          }
+        }
+        console.timeEnd(1)
+      })()
+    </script>
+  </body>
+</html>
