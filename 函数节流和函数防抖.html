@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>函数节流 && 函数防抖</title>
+    <style>
+      body {
+        height: 2000px;
+      }
+    </style>
+  </head>
+  <body>
+    函数节流[throttle] 防抖[debounce]
+    <button onclick="remove()">移除</button>
+    <button id="button">节流</button>
+  </body>
+  <script>
+    const debounce = (func, time) => {
+      let timer = null
+      return () => {
+        // 清除上一次的定时任务
+        timer && clearTimeout(timer)
+        // 延迟指定时间 执行
+        timer = setTimeout(() => {
+          func()
+        }, time)
+      }
+    }
+    const throttle = (func, time) => {
+      let startTime = null
+      return () => {
+        let rightNow = new Date().getTime()
+        // console.log(startTime, rightNow, time)
+        if (startTime && rightNow - startTime >= time) {
+          func()
+          startTime = new Date().getTime()
+        } else if (!startTime) {
+          startTime = new Date().getTime()
+          func()
+        }
+      }
+    }
+    document.querySelector('#button').addEventListener(
+      'click',
+      throttle(() => {
+        console.log('我被点了...')
+      }, 1000)
+    )
+    // 监听函数
+    let target = debounce(() => {
+      console.log('执行了')
+    }, 500)
+    window.addEventListener('scroll', target)
+
+    const remove = () => {
+      console.log(target == target)
+      window.removeEventListener('scroll', target)
+      target = null
+    }
+  </script>
+</html>
