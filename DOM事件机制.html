@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="dom0">DOM0级事件</button>
+    <button id="dom2">DOM2级事件</button>
+    <button id="dom3">DOM3级事件</button>
+    <script>
+      document.querySelector("#dom0").onclick = () => {
+        console.log("DOM0事件");
+      };
+      document.querySelector("#dom2").addEventListener("click", () => {
+        console.log("DOM2事件222");
+      });
+      document.querySelector("#dom2").addEventListener("click", event => {
+        // 停止事件传递 并且 停止触发其他相关事件的监听事件
+        // event.stopImmediatePropagation();
+        // event.stopPropagation();
+        console.log("DOM2事件111", event);
+      });
+
+      window.document.addEventListener("click", e => {
+        console.log("window click", e, e.currentTarget, e.target);
+      });
+      // 一个事件发生后，会在子元素和父元素之间传播（propagation）。这种传播分成三个阶段。
+      // 1.捕获 从上到下 window-> document -> body -> ...
+      // 2.目标 元素本身  target
+      // 3.冒泡 从下到上 target -> ...body -> document -> window
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function fn() {
+        console.log(this);
+      }
+      var obj = { fn: fn };
+      fn(); //this->window
+      obj.fn(); //this->obj
+      function sum() {
+        fn(); //this->window
+      }
+      sum();
+      var oo = {
+        sum: function() {
+          console.log(this); //this->oo
+          fn(); //this->window
+        }
+      };
+      oo.sum();
+    </script>
+  </body>
+</html>
