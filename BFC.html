@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>BFC</title>
+    <style>
+      .out {
+        background: red;
+        /* margin: 50px; */
+      }
+      .bfc {
+        overflow: hidden;
+      }
+      .fl {
+        float: left;
+        background: blueviolet;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="out fl">
+      我飘起来了 float
+    </div>
+    <div class="out bfc">
+      喂喂喂!大家不要生气嘛，生气会犯嗔戒的。悟空你也太调皮了，
+      我跟你说过叫你不要乱扔东西，你怎么又……你看，我还没说完你就把棍子给扔掉了!
+      月光宝盒是宝物，你把它扔掉会污染环境，要是砸到小朋友怎么办，就算砸不到小朋友，
+      砸到花花草草也是不对的。
+    </div>
+
+    <!-- <div class="out bfc">
+      <h1 style="background: yellow;margin: 50px;">
+        我是子元素 我有margin 50px
+      </h1>
+    </div> -->
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Closure</title>
+  </head>
+
+  <body>
+    <div id="test">你好</div>
+    <p>不断单击【click】按钮</p>
+
+    <button id="click_button">Click</button>
+    <p>hello,world</p>
+    <button id="grow">grow</button>
+    <button id="create">create</button>
+    <!-- <script>
+      function remove() {
+        var testNode = document.querySelector('#test');
+        document.querySelector('body').removeChild(testNode);
+        console.log(testNode);
+      }
+
+      remove();
+      function f() {
+        var str = Array(10000).join('#');
+        var foo = {
+          name: 'foo',
+        };
+        function unused() {
+          var message = 'it is only a test message';
+          str = 'unused: ' + str;
+        }
+        function getData() {
+          return 'data';
+        }
+        return getData;
+      }
+
+      var list = [];
+
+      document.querySelector('#click_button').addEventListener(
+        'click',
+        function() {
+          list.push(f());
+        },
+        false,
+      );
+    </script> -->
+    <script>
+      var x = [];
+      function grow() {
+        x.push(new Array(1000000).join('x'));
+      }
+      document.getElementById('grow').addEventListener('click', grow);
+
+      var detachedNodes;
+
+      function create() {
+        var ul = document.createElement('ul');
+        for (var i = 0; i < 10; i++) {
+          var li = document.createElement('li');
+          ul.appendChild(li);
+        }
+        detachedTree = ul;
+      }
+
+      document.getElementById('create').addEventListener('click', create);
+    </script>
+  </body>
+</html>
