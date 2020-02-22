@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据结构-散列表</title>
+  </head>
+  <body>
+    <h2>散列表</h2>
+    <div>HashTable</div>
+
+    <script>
+      
+      function HashTable() {
+        var items = [];
+        var loseHashCode = function(key) {
+          var hash = 0;
+          for (const item of key) {
+            hash += item.charCodeAt();
+          }
+          return hash % 37;
+        };
+
+        this.put = function(key, value) {
+          // hash 可能相同 hash 碰撞 
+          // 1.线性探测
+          // 2.分离链接
+          var index = loseHashCode(key);
+          items[index] = value;
+        };
+        this.get = function(key) {
+          return items[loseHashCode(key)];
+        };
+        this.values = function() {
+          return items;
+        };
+      }
+    </script>
+  </body>
+</html>

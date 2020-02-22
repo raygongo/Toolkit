@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据结构与算法</title>
+  </head>
+  <body>
+    <!-- 数组 -->
+    <h2>数组</h2>
+    <div>
+      var arr = [1,2,3,4,5]
+      <p>添加元素: arr.push</p>
+    </div>
+    <script>
+      /** 数组 **/
+      var arr = [1, 2, 3, 4];
+      arr = new Array(1, 2, 3, 4, 5);
+      // 添加元素到末尾
+      arr.push("22");
+      // 删除末尾
+      arr.pop();
+      // 添加元素到头部
+      arr.unshift("head");
+      // 删除头部
+      arr.shift();
+      console.log("数组", arr);
+      // 删除元素 splice(起点,个数)
+      arr.splice(2, 1);
+      console.log("数组", arr);
+      // 拼接数组
+      arr.concat([111, 222, 333]);
+      // 过滤数组
+      arr.filter((item, index, arr) => {
+        // 过滤掉小于1的数组项目
+        return item > 1;
+      });
+      // map 返回新的数组项目
+      arr.map((item, index, arr) => {
+        // 每一个数据项 都加1
+        return item + 1;
+      });
+      // 排序
+      arr.sort((a, b) => {
+        return a - b;
+      });
+      // 搜索方法
+      arr.indexOf(1);
+      arr.includes("1");
+    </script>
+  </body>
+</html>

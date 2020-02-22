@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据结构与算法</title>
+  </head>
+  <body>
+    <!-- 数组 -->
+    <h2>链表</h2>
+    <div></div>
+    <script>
+      /** 链表 **/
+      function LinkList() {
+        var head = null;
+        var length = 0;
+        // 列表项 构造函数
+        var Node = function(element) {
+          this.next = null;
+          this.element = element;
+        };
+        // 向末尾添加元素
+        this.append = function(value) {
+          var node = new Node(value);
+          // 链表为空
+          if (this.isEmpty()) {
+            head = node;
+          } else {
+            var current = head;
+            // 循环 找到为节点的next为空的 最后一个元素
+            while (current.next) {
+              current = current.next;
+            }
+            // 讲新增的节点 添加至链表末尾
+            current.next = node;
+          }
+          length++;
+        };
+
+        // 判断列表是否为空
+        this.isEmpty = function(value) {
+          return !head;
+        };
+
+        // 判断列表的数量
+        this.size = function() {
+          return length;
+        };
+
+        // 删除链表中某元素
+        this.remove = function(element) {
+          if (this.isEmpty()) {
+            return;
+          }
+          // 当前元素
+          var current = head;
+          // 上一个元素
+          var pre = null;
+          // 如果是頭部
+          if (current.element.key == element.key) {
+            head = current.next;
+            length--;
+          } else {
+            // 到尾循环 找到需要删除的元素
+            while (current.next && current.element.key !== element.key) {
+              pre = current;
+              current = current.next;
+            }
+            if (current.element.key == element.key) {
+              // 找到刪除的了
+              pre.next = current.next;
+              length--;
+              return;
+            }
+            return null;
+          }
+        };
+        // 删除链表中某个位置元素
+        this.removeAt = function(position) {
+          if (position < 0 || position > this.size()) {
+            return;
+          }
+          // 当前元素
+          var current = head;
+          // 上一个元素
+          var pre = null;
+          var index = 0;
+          // 如果是頭部
+          if (position == 0) {
+            head = current.next;
+          } else {
+            // 到尾循环 找到需要删除的元素
+            while (index++ < position) {
+              pre = current;
+              current = current.next;
+            }
+            // 找到刪除的了
+            pre.next = current.next;
+          }
+          return current.element;
+        };
+        /** 插入元素至某个位置 **/
+
+        this.insert = function(position, element) {
+          // 检查越界
+          if (position <= length && position >= 0) {
+            var node = new Node(element),
+              current = head,
+              index = 0,
+              pre = null;
+
+            // 如果插入的是头部
+            if (position === 0) {
+              node.next = current;
+              head = node;
+            } else {
+              while (index++ < position) {
+                pre = current;
+                current = current.next;
+              }
+              // pre node current
+              node.next = current;
+              pre.next = node;
+              
+            }
+            length++;
+          } else {
+            return false;
+          }
+        };
+        /**
+         *
+         *  将所有元素 输出为文本
+         * */
+        this.toString = function() {
+          var current = head;
+          let arr = [];
+          while (current) {
+            arr.push(current.element);
+            current = current.next;
+          }
+          console.log(arr);
+        };
+        this.getHead = function() {
+          return head;
+        };
+      }
+      var list = new LinkList();
+      list.append({ key: 111 });
+      list.append({ key: 2222 });
+      list.append({ key: 3333 });
+      list.append({ key: 4444 });
+      console.log(list.toString());
+    </script>
+  </body>
+</html>

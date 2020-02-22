@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据结构-二叉树</title>
+  </head>
+  <body>
+    <h2>二叉树</h2>
+    <div>一个节点 包括 Key Left(比key小的) Right(比key大的)</div>
+
+    <script>
+      function Tree() {
+        var Node = function(key) {
+          this.key = key;
+          this.left = null;
+          this.right = null;
+        };
+        var root = null;
+        var insertNode = function(node, newNode) {
+          if (newNode.key > node.key) {
+            if (node.right === null) {
+              node.right = newNode;
+            } else {
+              insertNode(node.right, newNode);
+            }
+          } else {
+            if (node.left === null) {
+              node.left = newNode;
+            } else {
+              insertNode(node.left, newNode);
+            }
+          }
+        };
+        var inOrderNode = function(node, callback) {
+          if (node !== null) {
+            inOrderNode(node.left, callback);
+            callback(node.key);
+            inOrderNode(node.right, callback);
+          }
+        };
+        var preOrderNode = function(node, callback) {
+          if (node !== null) {
+            callback(node.key);
+            preOrderNode(node.left, callback);
+            preOrderNode(node.right, callback);
+          }
+        };
+        var postOrderNode = function(node, callback) {
+          if (node !== null) {
+            postOrderNode(node.left, callback);
+            postOrderNode(node.right, callback);
+            callback(node.key);
+          }
+        };
+        /* 中序遍历 从小到大  左中右*/
+        this.inOrder = function(callback) {
+          inOrderNode(root, callback);
+        };
+        /* 先序遍历 中左右 */
+        this.preOrder = function(callback) {
+          preOrderNode(root, callback);
+        };
+        /* 后序遍历 左右中 */
+        this.postOrder = function(callback) {
+          postOrderNode(root, callback);
+        };
+        var maxNode = function(node) {
+          let current = node;
+          if (current) {
+            while (current && current.right !== null) {
+              current = current.right;
+            }
+            return current.key;
+          }
+        };
+        /**
+         * 查找最大值
+         * */
+        this.max = function() {
+          return maxNode(root);
+        };
+        var minNode = function(node) {
+          let current = node;
+          if (current) {
+            while (current && current.left !== null) {
+              current = current.left;
+            }
+            return current.key;
+          }
+        };
+        /** 找出最小值 **/
+        this.min = function() {
+          return minNode(root);
+        };
+        /** 插入元素 **/
+        this.insert = function(key) {
+          var node = new Node(key);
+          if (root === null) {
+            root = node;
+          } else {
+            insertNode(root, node);
+          }
+        };
+        /** 找出指定值 **/
+        this.serch = function(key) {
+          return searchNode(key, root);
+        };
+        var searchNode = function(key, node) {
+          if (node === null) {
+            return false;
+          }
+          if (key > node.key) {
+            return searchNode(key, node.right);
+          } else if (key < node.key) {
+            return searchNode(key, node.left);
+          } else if (key === node.key) {
+            return true;
+          } else {
+            return false;
+          }
+        };
+        this.values = function() {
+          return root;
+        };
+      }
+    </script>
+  </body>
+</html>

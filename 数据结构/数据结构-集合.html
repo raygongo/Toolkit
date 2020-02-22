@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数据结构-集合</title>
+  </head>
+  <body>
+    <h2>集合</h2>
+    <div>一组不可重复的数据</div>
+    <div>ES6中的 Set 类型</div>
+
+    <script>
+      function _Set() {
+        var items = {};
+        this.add = function(item) {
+          items[item] = item;
+        };
+        this.values = function() {
+          return Object.keys(items);
+        };
+      }
+
+      function _Map() {
+        var items = {};
+        this.add = function(key,value) {
+          items[key] = value;
+        };
+        this.values = function() {
+          return Object.keys(items);
+        };
+      }
+    </script>
+  </body>
+</html>
