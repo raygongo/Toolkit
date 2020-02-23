@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>单例模式</title>
+  </head>
+  <body>
+    <button id="showMessage">显示</button>
+    <button id="showMessage1">显示</button>
+    <script>
+      // 单例模式
+      var CreatDiv = (function() {
+        // 用来保存实例
+        var instance;
+        // 内部 真正 返回的类
+        var creatDiv = function(html) {
+          // 如果实例已存在 直接返回
+          if (instance) {
+            return instance;
+          }
+          // 第一次初始化时
+          this.html = html;
+          this.init();
+          // 将实例保存至闭包内部环境变量中 并且返回
+          return (instance = this);
+        };
+        // 写在原型中的方法
+        creatDiv.prototype.init = function() {
+          var div = document.createElement("div");
+          div.innerHTML = this.html;
+          document.body.appendChild(div);
+        };
+        return creatDiv;
+      })();
+
+      var div1 = new CreatDiv("我是div1");
+      var div2 = new CreatDiv("我是div2");
+      console.log(div1 === div2);
+      // 利用代理实现单例
+      var CreateSpan = function(html) {
+        this.html = html;
+        this.init();
+      };
+      CreateSpan.prototype.init = function() {
+        var div = document.createElement("span");
+        div.innerHTML = this.html;
+        document.body.appendChild(div);
+      };
+      /**
+       * 通过代理 来实现单例
+       * 与非单例相比 ,返回的是一个闭包函数 返回一个实例
+       * 闭包中 会将第一次创建后的实例保存起来
+       * 每次返回的 都是第一次创建的
+       * **/
+      var ProxySingleCreateSpan = (function() {
+        var instance;
+        return function(html) {
+          if (!instance) {
+            instance = new CreateSpan(html);
+          }
+          return instance;
+        };
+      })();
+      var span1 = new ProxySingleCreateSpan("span1");
+      var span2 = new ProxySingleCreateSpan("span2");
+
+      // 使用闭包封装私有变量
+      var user = (function() {
+        var _user = "张学友",
+          _age = 18;
+        return {
+          getUserInfo: function() {
+            return _user + _age++;
+          }
+        };
+      })();
+
+      // 使用单例 添加taost框
+      var Message = (function() {
+        var div = null;
+        return function(info) {
+          if (!div) {
+            var dom = document.createElement("div");
+            document.body.appendChild(dom);
+            div = dom;
+          }
+          div.innerText = info;
+          return div;
+        };
+      })();
+      document
+        .querySelector("#showMessage")
+        .addEventListener("click", function() {
+          new Message("你好");
+        });
+      document
+        .querySelector("#showMessage1")
+        .addEventListener("click", function() {
+          new Message("你好啊");
+        });
+    </script>
+  </body>
+</html>
