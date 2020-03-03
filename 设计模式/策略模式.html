@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>策略模式</title>
+  </head>
+  <body>
+    <h1>策略模式</h1>
+    <form action="" id="registerForm">
+      <div>用户名:<input type="text" name="userName" /></div>
+      <div>密码:<input type="password" name="password" /></div>
+      <div>手机:<input type="test" name="tel" /></div>
+    </form>
+    <script>
+      // var calculateBonus = function(level, salary) {
+      //   if (level === "S") {
+      //     return salary * 4;
+      //   }
+      //   if (level === "A") {
+      //     return salary * 3;
+      //   }
+      // };
+      // calculateBonus("S", 5000);
+      // console.log(calculateBonus("S", 5000));
+      // var calculateBonus = function(level, salary) {
+      //   if (level === "S") {
+      //     return performanceS;
+      //   }
+      //   if (level === "A") {
+      //     return performanceA;
+      //   }
+      // };
+      // // 组合函数 将算法封装
+      // var performanceS = function(salary) {
+      //   return salary * 4;
+      // };
+      // var performanceA = function(salary) {
+      //   return salary * 4;
+      // };
+      //  策略类型
+      var performanceA = function(salary) {};
+      performanceA.prototype.calculate = function() {
+        return this.salary * 4;
+      };
+      // 奖金类
+      var Bonus = function() {
+        this.salary = null; // 基本工资
+        this.strategy = null; // 策略类型
+      };
+      // 设置奖金方法
+      Bonus.prototype.setSalary = function(salary) {
+        this.salary = salary;
+      };
+      // 设置策略对象
+      Bonus.prototype.setStraregy = function(strategy) {
+        this.strategy = strategy;
+      };
+      Bonus.prototype.getBonus = function() {
+        return this.strategy.calculate(this.salary);
+      };
+      var bonus = new Bonus();
+      bonus.setSalary(10000);
+      // 设置 策略对象
+      bonus.setStraregy(new performanceA());
+      // 利用JSON对象创建策略
+      // var strategies = {
+      //   S: function(salary) {
+      //     return salary * 4;
+      //   },
+      //   A: function() {
+      //     return salary * 3;
+      //   },
+      //   B: function() {
+      //     return salary * 2;
+      //   }
+      // };
+      var calculateBonus = function(level, salary) {
+        return strategies[level](salary);
+      };
+      // 定义校验策略
+      var strategies = {
+        require(value, errorMsg) {
+          if (value === "") {
+            return errorMsg;
+          }
+        },
+        min(value, length, errorMsg) {
+          if (value.length < length) {
+            return errorMsg;
+          }
+        }
+      };
+      /********  validator  *****/
+      class Validator {
+        constructor() {
+          this.cache = [];
+        }
+        add(dom, rules) {
+          // 遍历规则
+          rules.forEach(element => {});
+        }
+      }
+    </script>
+  </body>
+</html>

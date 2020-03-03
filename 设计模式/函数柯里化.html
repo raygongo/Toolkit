@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>函数柯里化</title>
+  </head>
+  <body>
+    <h1>函数柯里化:</h1>
+    一个函数接受参数,将参数保存至闭包中,并且返回另外一个函数
+    <div>
+      如果不穿参数则 进行计算
+    </div>
+    <div>一个函数还有两套逻辑</div>
+    <script>
+      var currying = (function() {
+        var arg = [];
+        return function(...params) {
+          if (params.length) {
+            arg = arg.concat(params);
+          } else {
+            return arg.reduce((pre, cur) => pre + cur);
+          }
+        };
+      })();
+      // var add = function(x) {
+      //   return function(y) {
+      //     return x + y;
+      //   };
+      // };
+      // 初步封装
+      function add(..._args) {
+        // 第一次执行时，定义一个数组专门用来存储所有的参数
+        // var _args = arg;
+        let flag = true;
+        // 在内部声明一个函数，利用闭包的特性保存_args并收集所有的参数值
+        var _adder = function(...arg) {
+          _args.push(...arg);
+          if (flag) {
+            return _adder;
+          }
+        };
+
+        // 利用toString隐式转换的特性，当最后执行时隐式转换，并计算最终的值返回
+        _adder.toString = function() {
+          // debugger;
+          flag = false;
+          console.log(1);
+          return _args.reduce(function(a, b) {
+            return a + b;
+          });
+        };
+        return _adder;
+      }
+    </script>
+  </body>
+</html>
