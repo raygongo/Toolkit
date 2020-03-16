@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Observer() {
+        var listers = {
+          // click: [function a, function b]
+        };
+        function addLister(eventName, func) {
+          listers[eventName].push(func);
+        }
+        function handleTigger(eventName ) {
+          if (listers[eventName]) {
+            listers[eventName].forEach(targerFunc => {
+              targerFunc();
+            });
+          }
+        }
+        function removeLister(eventName, func) {
+          listers[eventName].forEach((targerFunc, index, arr) => {
+            if(targerFunc === func) {
+              arr.splice(index, 1);
+            }
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

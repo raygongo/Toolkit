@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>发布订阅模式</title>
+  </head>
+  <body>
+    <script>
+      class Observer {
+        constructor() {
+          // cache
+          this.listeners = {
+            // goHome:[()=>{},]
+          };
+        }
+        addListener(eventName, func) {
+          if (!eventName) {
+            return;
+          }
+          if (this.listeners[eventName]) {
+            this.listeners[eventName].push(func);
+          } else {
+            this.listeners[eventName] = [func];
+          }
+        }
+        handleTigger(eventName) {
+          if (eventName && this.listeners[eventName]) {
+            this.listeners[eventName].forEach(func => {
+              func();
+            });
+          }
+        }
+        removeListener(event, func) {
+          if (event && this.listeners[event]) {
+            this.listeners[event].forEach((targetFunc, index, arr) => {
+              if (func === targetFunc) {
+                arr.splice(index, 1);
+              }
+            });
+          }
+        }
+      }
+      var Event = new Observer();
+    </script>
+  </body>
+</html>
