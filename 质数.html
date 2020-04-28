@@ -9,24 +9,50 @@
   <body>
     <script>
       // 找质数
-      ;(function() {
+      // ;(function() {
+      //   let arr = []
+      //   // 找出100以内的质数
+      //   console.time(1)
+      //   for (let i = 2; i <= 10; i++) {
+      //     let flag = false
+      //     for (let a = 2; a <= Math.sqrt(i); a++) {
+      //       console.log(`${i} % ${a}`)
+      //       if (i % a == 0) {
+      //         // 不是质数
+      //         flag = true
+      //         break
+      //       }
+      //     }
+      //     if (!flag) {
+      //       // console.log(`${i}是质数`)
+      //       arr.push(i)
+      //     }
+      //   }
+      //   console.log(arr)
+      //   console.timeEnd(1)
+      // })()
+      (function () {
+        let arr = [];
         // 找出100以内的质数
-        console.time(1)
-        for (let i = 2; i <= 1000000; i++) {
-          let flag = false
+        console.time(1);
+        for (let i = 2; i <= 10000; i++) {
+          let flag = false;
           for (let a = 2; a <= Math.sqrt(i); a++) {
+            // console.log(`${i} % ${a}`);
             if (i % a == 0) {
               // 不是质数
-              flag = true
-              break
+              flag = true;
+              break;
             }
           }
           if (!flag) {
             // console.log(`${i}是质数`)
+            arr.push(i);
           }
         }
-        console.timeEnd(1)
-      })()
+        console.log(arr);
+        console.timeEnd(1);
+      })();
     </script>
   </body>
 </html>
